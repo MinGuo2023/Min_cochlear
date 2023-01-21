@@ -1,0 +1,99 @@
+The following are the results of my code:
+
+1. Execution of the cosine similarity function
+INPUT:
+s = similarity()
+print(s.cosine_similarity("goose", "duck", "speech2vec"))
+print(s.cosine_similarity("of", "of", "word2vec"))
+
+OUTPUT:
+0.7076147205496787
+0.9999999999999999
+
+COMMENTS:
+If a word is not found in the speech2vec file or the word2vec file, my function regards this word as the zero vector.
+So, its cosine similarity with any word is zero.
+
+
+
+2. Execution of the visualize_items function
+INPUT:
+s = similarity()
+s.visualize_items("CBS-711")
+
+OUTPUT:
+[t-SNE] Computing 17 nearest neighbors...
+[t-SNE] Indexed 18 samples in 0.001s...
+[t-SNE] Computed neighbors for 18 samples in 0.071s...
+[t-SNE] Computed conditional probabilities for sample 18 / 18
+[t-SNE] Mean sigma: 1.168674
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 51.473316
+[t-SNE] KL divergence after 1000 iterations: 0.165433
+[t-SNE] Computing 15 nearest neighbors...
+[t-SNE] Indexed 16 samples in 0.000s...
+[t-SNE] Computed neighbors for 16 samples in 0.011s...
+[t-SNE] Computed conditional probabilities for sample 16 / 16
+[t-SNE] Mean sigma: 1.225301
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 55.805664
+[t-SNE] KL divergence after 1000 iterations: 0.671111
+(For the plot, please see a picture titled TSNE.)
+
+COMMENTS:
+None
+
+
+
+3. Execution of the visualize_items function
+INPUT:
+s = similarity()
+f = open("data-cochlear.txt", "r")
+pd, col1, col2, col3 = s.pairwise_similarity(f, "speech2vec")
+print(pd)
+
+OUTPUT:
+           ID    Item  Similarity
+0     CAF-657  lizard    2.000000
+1     CAF-657     cat    0.537147
+2     CAF-657    hawk    0.605400
+3     CAF-657     dog    0.648361
+4     CAF-657  turtle    0.477301
+...       ...     ...         ...
+1302  SZA-781   puppy    0.761028
+1303  SZA-781  kitten    0.741291
+1304  SZA-781   goose    0.706725
+1305  SZA-781    duck    0.707615
+1306  SZA-781    wolf    0.535173
+[1307 rows x 3 columns]
+
+COMMENTS:
+Here, the first value for each participant is always 2.
+
+
+
+4. Execution of the compute_clusters function
+INPUT:
+clu = cluster()
+f = open("data-cochlear.txt", "r")
+print(clu.compute_clusters(f, "speech2vec"))
+
+OUTPUT:
+{'CAF-657': [6, 5], 'CAJ-663': [3, 2], 'CAM-666': [7, 6], 'CAN-667': [2, 2], 'CAP-671': [5, 4], 'CAQ-672': [7, 6], 'CAR-673': [2, 1], 'CAS-674': [3, 3], 'CAU-667': [2, 2], 'CAV-678': [3, 2], 'CAY-681': [3, 2], 'CBD-686': [3, 3], 'CBF-691': [3, 2], 'CBH-693': [5, 4], 'CBJ-697': [2, 1], 'CBL-698': [2, 1], 'CBM-702': [3, 2], 'CBP-707': [4, 4], 'CBS-711': [3, 2], 'CBW-715': [4, 3], 'CCB-720': [2, 2], 'CCC-721': [2, 2], 'CCD-722': [4, 4], 'CCF-724': [3, 2], 'CCH-726': [2, 1], 'CCL-730': [6, 6], 'CCX-744': [3, 2], 'CDG-753': [2, 2], 'CDH-754': [1, 0], 'CDM-759': [5, 5], 'CDR-764': [3, 2], 'CDU-767': [4, 4], 'SFZ-149': [3, 2], 'SGO-159': [8, 7], 'SIU-211': [4, 3], 'SIZ-390': [2, 1], 'SKE-234': [9, 8], 'SMK-401': [4, 3], 'SNI-300': [2, 1], 'SNR-308': [3, 2], 'SNT-310': [3, 2], 'SNV-312': [4, 4], 'SNY-315': [5, 4], 'SOA-317': [1, 0], 'SOE-320': [2, 1], 'SOQ-329': [4, 3], 'SOX-335': [1, 0], 'SPA-338': [3, 3], 'SPC-340': [3, 3], 'SPH-344': [2, 2], 'SPL-436': [3, 2], 'SPV-450': [3, 2], 'SPX-452': [3, 3], 'SRF-483': [3, 2], 'SRR-498': [4, 4], 'SSG-520': [3, 2], 'SSZ-539': [3, 2], 'SUG-544': [2, 2], 'SUT-556': [2, 1], 'SUV-558': [3, 2], 'SVA-563': [3, 2], 'SVH-570': [1, 0], 'SVY-587': [2, 2], 'SZA-781': [3, 4]}
+
+COMMENTS:
+The output dictionary is in the following format:
+{Participant ID: [number of clusters, number of switches], ...}
+
+
+
+5. Execution of the visualize_clusters function
+INPUT:
+clu = cluster()
+f = open("data-cochlear.txt", "r")
+clu.visualize_clusters(f, "speech2vec")
+
+OUTPUT:
+Please refer to the picture titled "Clusters bar plot"
+
+COMMENTS:
+The bar plot shows 1. the number of switches for a given ID, 2. the number of clusters for a given ID,
+3. the average number of clusters, 4. the average number of switches
